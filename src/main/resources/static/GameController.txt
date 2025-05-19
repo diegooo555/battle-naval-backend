@@ -1,0 +1,29 @@
+package co.uptc.controllers;
+
+import co.uptc.services.GameManager;
+import co.uptc.dtos.PlayerDtoGame;
+import co.uptc.models.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.simp.annotation.SendToUser;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.util.HtmlUtils;
+
+import java.security.Principal;
+import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
+
+@Controller
+public class GameController {
+    @Autowired
+    private GameManager gameManager;
+
+    @MessageMapping("/play")
+    @SendToUser("/queue/position-updates")
+    public InfoStart play(PlayerDto player, Principal principal) {
+        String username = (principal != null) ? principal.getName() : player.getName();
+
+        System.out.println("EJECUTANDO PLAY ");
+        return new InfoStart("Esperando jugadores..." + player.getName() );
+    }
+}
