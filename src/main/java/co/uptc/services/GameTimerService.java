@@ -27,7 +27,6 @@ public class GameTimerService {
         cancelTimer(gameRoom.getGameId());
 
         ScheduledFuture<?> future = scheduler.schedule(() -> {
-            System.out.println("Tiempo agotado para el juego con ID: " + gameRoom.getGameId());
             gameRoom.getListPlayers().forEach(player -> {
                 if (player.getPlayerStatus() != PlayerStatus.PLAYING) {
                     player.getBoard().setShips(DefaultShipPositions.getRandomDefaultPositions());
@@ -48,7 +47,6 @@ public class GameTimerService {
         ScheduledFuture<?> future = timers.remove(gameId);
         if (future != null && !future.isDone()) {
             future.cancel(true);
-            System.out.println("Temporizador cancelado para: " + gameId);
         }
     }
 

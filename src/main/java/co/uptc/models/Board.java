@@ -16,11 +16,6 @@ public class Board {
         this.ships = new ArrayList<>();
         this.shots = new ArrayList<>();
     }
-    public void showInfoShips(){
-        ships.forEach(ship -> {
-            System.out.println("BArco: " + ship.getIdShip() + " Posicion: " + ship.getPosition().posittionToString());
-        });
-    }
 
     public void generatePositionsShips(){
         ships.forEach(ship -> {
