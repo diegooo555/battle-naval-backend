@@ -1,6 +1,5 @@
 package co.uptc.controllers;
 
-import co.uptc.constants.PlayerStatus;
 import co.uptc.dtos.DataGameRoom;
 import co.uptc.dtos.DataShot;
 import co.uptc.dtos.FinishPosition;
@@ -10,7 +9,6 @@ import co.uptc.services.GameManager;
 import co.uptc.constants.GameStatus;
 import co.uptc.dtos.PlayerDtoGame;
 import co.uptc.models.*;
-import java.util.concurrent.ThreadLocalRandom;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.annotation.SendToUser;
