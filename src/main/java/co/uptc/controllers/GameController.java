@@ -59,7 +59,6 @@ public class GameController {
     @MessageMapping("/finish-positioning")
     @SendToUser("/queue/position-updates")
     public InfoMessage changeStateGame(FinishPosition finishPosition) {
-        finishPosition.showInfoShips();
         GameRoom gameRoom = gameManager.findGameRoom(finishPosition.getGameId());
         boolean isAllPlayersReady = gameManager.validatePlayerReady(gameRoom, finishPosition);
         if (isAllPlayersReady) {
@@ -82,7 +81,6 @@ public class GameController {
         PlayerDto player = dataShot.getPlayer();
         Shot shot = dataShot.getShot();
         GameRoom gameRoom = gameManager.newShot(player.getGameId(), player.getPlayerId(), shot);
-        System.out.println(gameRoom.getInfoPlayers() + "ME ACOSTUMBRE AL SOFTWARE YA NO PATEA");
         return new DataGameRoom(gameRoom);
     }
 

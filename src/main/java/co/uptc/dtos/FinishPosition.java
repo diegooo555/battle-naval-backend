@@ -13,7 +13,7 @@ public class FinishPosition {
 
     public void showInfoShips(){
         ships.forEach(ship -> {
-            System.out.println("BArco: " + ship.getIdShip()
+            System.out.println("Barco: " + ship.getIdShip()
                     + " Size: " + ship.getSize() +
                     " Estado: " + ship.isSunk() +
                     " Posicion: " + ship.getPosition().getX() + "," + ship.getPosition().getY());
