@@ -63,7 +63,14 @@ public class GameManager {
                     shot.setResult(ShotResult.HIT);
                     player.newShot(shot);
                     gameTimerService.cancelTimer(gameId);
+
+                    boolean wasAlreadySunk = ship.isSunk();
                     ship.determinateIsSunk(player.getBoard().getShots());
+
+                    if (!wasAlreadySunk && ship.isSunk()) {
+                        gameRoom.setLastSunkShip(ship.getIdShip());
+                    }
+                    
                     gameRoom.revalidateStatetGame();
                     if (gameRoom.getGameStatus() == GameStatus.FINISHED) {
                         activeGames.remove(gameId);
@@ -105,5 +112,12 @@ public class GameManager {
             gameTimerService.startTurnTimer(gameRoom, 15);
         }
         return isAllPlayersReady;
+    }
+
+    public synchronized GameRoom disconnectGame(String gameId) {
+        GameRoom gameRoom = findGameRoom(gameId);
+        gameRoom.setGameStatus(GameStatus.FINISHED);
+        gameTimerService.cancelTimer(gameId);
+        return gameRoom;
     }
 }

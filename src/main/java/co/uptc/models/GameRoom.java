@@ -17,11 +17,13 @@ public class GameRoom {
     protected String currentTurn;
     protected Player winner;
     private GameStatus gameStatus;
+    private Long lastSunkShip;
 
     public GameRoom(String idGame) {
         this.gameId = idGame;
         this.gameStatus = GameStatus.WAITING_PLAYERS;
         listPlayers = new ArrayList<>();
+        this.lastSunkShip = null;
     }
 
     public void setShipsPlayer(String playerId, List<Ship> ships) {
@@ -69,4 +71,13 @@ public class GameRoom {
         }
         return infoPlayers;
     }
+
+    public void setLastSunkShip(Long shipId) {
+        this.lastSunkShip = shipId;
+    }
+
+    public Long getLastSunkShip() {
+        return lastSunkShip;
+    }
+
 }

@@ -84,6 +84,13 @@ public class GameController {
         return new DataGameRoom(gameRoom);
     }
 
+    @MessageMapping("/disconnect")
+    @SendToUser("/queue/position-updates")
+    public DataGameRoom disconnect(PlayerDtoGame player){
+        GameRoom  gameRoom = gameManager.disconnectGame(player.getGameId());
+        return new DataGameRoom(gameRoom);
+    }
+
     @GetMapping("/name-opponent/{username}/{gameId}")
     public ResponseEntity<String> nameOpponent(@PathVariable String username, @PathVariable String gameId) {
         GameRoom gameRoom = gameManager.findGameRoom(gameId);
