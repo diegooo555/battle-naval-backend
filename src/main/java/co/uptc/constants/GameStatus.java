@@ -5,4 +5,5 @@ public enum GameStatus {
     POSIOTIONING,
     IN_PROGRESS,
     FINISHED,
+    DISCONNECTED
 }

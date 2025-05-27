@@ -116,7 +116,7 @@ public class GameManager {
 
     public synchronized GameRoom disconnectGame(String gameId) {
         GameRoom gameRoom = findGameRoom(gameId);
-        gameRoom.setGameStatus(GameStatus.FINISHED);
+        gameRoom.setGameStatus(GameStatus.DISCONNECTED);
         gameTimerService.cancelTimer(gameId);
         return gameRoom;
     }
