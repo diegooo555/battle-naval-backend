@@ -93,12 +93,6 @@ public class GameController {
 
     @GetMapping("/name-opponent/{username}/{gameId}")
     public ResponseEntity<String> nameOpponent(@PathVariable String username, @PathVariable String gameId) {
-        GameRoom gameRoom = gameManager.findGameRoom(gameId);
-        String nameOpponent = gameRoom.getListPlayers().stream()
-                .map(Player::getName)
-                .filter(name -> !name.equals(username))
-                .findFirst()
-                .orElse(null);
-        return ResponseEntity.ok(nameOpponent);
+        return ResponseEntity.ok(gameManager.findNameOponnent(gameId, username));
     }
 }

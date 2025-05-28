@@ -74,6 +74,8 @@ public class GameManager {
                     gameRoom.revalidateStatetGame();
                     if (gameRoom.getGameStatus() == GameStatus.FINISHED) {
                         activeGames.remove(gameId);
+                        gameTimerService.cancelTimer(gameId);
+                        return gameRoom;
                     }
                     gameTimerService.startTurnTimer(gameRoom, 15);
                     return gameRoom;
@@ -89,6 +91,16 @@ public class GameManager {
     
     public synchronized GameRoom findGameRoom(String gameId) {
         return activeGames.get(gameId);
+    }
+
+    public synchronized String findNameOponnent(String gameId, String username) {
+        GameRoom gameRoom = findGameRoom(gameId);
+        String nameOpponent = gameRoom.getListPlayers().stream()
+                .map(Player::getName)
+                .filter(name -> !name.equals(username))
+                .findFirst()
+                .orElse(null);
+        return nameOpponent;
     }
 
     public synchronized void cancelTimerGame(String gameId) {
@@ -118,6 +130,7 @@ public class GameManager {
         GameRoom gameRoom = findGameRoom(gameId);
         gameRoom.setGameStatus(GameStatus.DISCONNECTED);
         gameTimerService.cancelTimer(gameId);
+        activeGames.remove(gameId);
         return gameRoom;
     }
 }
